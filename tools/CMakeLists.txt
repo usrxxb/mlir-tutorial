@@ -5,14 +5,14 @@ set (LIBS
     ${dialect_libs}
     ${conversion_libs}
     AffineFullUnroll
-    MLIRNoisy
+#    MLIRNoisy
     MLIROptLib
     MLIRPass
     MLIRPoly
     MulToAdd
-    NoisyPasses
+#    NoisyPasses
     PolyToStandard
-    ortools::ortools
+#    ortools::ortools
 )
 
 add_llvm_executable(tutorial-opt tutorial-opt.cpp)

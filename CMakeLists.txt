@@ -6,10 +6,15 @@ set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard to conform to")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(BUILD_DEPS ON)
 
+# 查找MLIR安装路径（根据实际安装位置调整）
+set(MLIR_DIR "/data2/xiaobin.xia/mlir/llvm-project/build/lib/cmake/mlir" CACHE PATH "MLIR CMake配置目录")
+set(LLVM_DIR "/data2/xiaobin.xia/mlir/llvm-project/build/lib/cmake/llvm" CACHE PATH "MLIR CMake配置目录")
 find_package(MLIR REQUIRED CONFIG)
 
 message(STATUS "Using MLIRConfig.cmake in: ${MLIR_DIR}")
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
+#message(${LLVM_INCLUDE_DIRS})
+message(${MLIR_INCLUDE_DIRS})
 
 set(MLIR_BINARY_DIR ${CMAKE_BINARY_DIR})
 
@@ -21,19 +26,22 @@ include(AddMLIR)
 include_directories(${LLVM_INCLUDE_DIRS})
 include_directories(${MLIR_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR})
-include_directories(${PROJECT_SOURCE_DIR}/externals/llvm-project)
+#include_directories(${PROJECT_SOURCE_DIR}/externals/llvm-project)
 include_directories(${PROJECT_BINARY_DIR})
 
-message(STATUS "Fetching or-tools...")
-include(FetchContent)
-FetchContent_Declare(
-  or-tools
-  GIT_REPOSITORY https://github.com/google/or-tools.git
-  GIT_TAG        v9.11
-)
-FetchContent_MakeAvailable(or-tools)
-message(STATUS "Done fetching or-tools")
+include_directories(./)
+include_directories(/data2/xiaobin.xia/mlir/llvm-project)
 
-add_subdirectory(tests)
+#message(STATUS "Fetching or-tools...")
+#include(FetchContent)
+#FetchContent_Declare(
+#  or-tools
+#  GIT_REPOSITORY https://github.com/google/or-tools.git
+#  GIT_TAG        v9.11
+#)
+#FetchContent_MakeAvailable(or-tools)
+#message(STATUS "Done fetching or-tools")
+
+#add_subdirectory(tests)
 add_subdirectory(tools)
 add_subdirectory(lib)

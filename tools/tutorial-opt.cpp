@@ -1,9 +1,9 @@
 #include "lib/Conversion/PolyToStandard/PolyToStandard.h"
-#include "lib/Dialect/Noisy/NoisyDialect.h"
+//#include "lib/Dialect/Noisy/NoisyDialect.h"
 #include "lib/Dialect/Poly/PolyDialect.h"
 #include "lib/Transform/Affine/Passes.h"
 #include "lib/Transform/Arith/Passes.h"
-#include "lib/Transform/Noisy/Passes.h"
+//#include "lib/Transform/Noisy/Passes.h"
 #include "mlir/include/mlir/Conversion/ArithToLLVM/ArithToLLVM.h"
 #include "mlir/include/mlir/Conversion/ControlFlowToLLVM/ControlFlowToLLVM.h"
 #include "mlir/include/mlir/Conversion/FuncToLLVM/ConvertFuncToLLVMPass.h"
@@ -59,16 +59,16 @@ void polyToLLVMPipelineBuilder(mlir::OpPassManager &manager) {
 int main(int argc, char **argv) {
   mlir::DialectRegistry registry;
   registry.insert<mlir::tutorial::poly::PolyDialect>();
-  registry.insert<mlir::tutorial::noisy::NoisyDialect>();
+  //registry.insert<mlir::tutorial::noisy::NoisyDialect>();
   mlir::registerAllDialects(registry);
   mlir::registerAllPasses();
 
   mlir::tutorial::registerAffinePasses();
   mlir::tutorial::registerArithPasses();
-  mlir::tutorial::noisy::registerNoisyPasses();
+  //mlir::tutorial::noisy::registerNoisyPasses();
 
   // Dialect conversion passes
-  mlir::tutorial::poly::registerPolyToStandardPasses();
+  mlir::tutorial::poly::registerPolyToStandardPass();
 
   mlir::PassPipelineRegistration<>(
       "poly-to-llvm", "Run passes to lower the poly dialect to LLVM",
