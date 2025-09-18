@@ -6,9 +6,10 @@ set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard to conform to")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(BUILD_DEPS ON)
 
+message("mlirtop:${MLIR_TOP}")
 # 查找MLIR安装路径（根据实际安装位置调整）
-set(MLIR_DIR "/data2/xiaobin.xia/mlir/llvm-project/build/lib/cmake/mlir" CACHE PATH "MLIR CMake配置目录")
-set(LLVM_DIR "/data2/xiaobin.xia/mlir/llvm-project/build/lib/cmake/llvm" CACHE PATH "MLIR CMake配置目录")
+set(MLIR_DIR "${MLIR_TOP}/llvm-project/build/lib/cmake/mlir" CACHE PATH "MLIR CMake配置目录")
+set(LLVM_DIR "${MLIR_TOP}/llvm-project/build/lib/cmake/llvm" CACHE PATH "MLIR CMake配置目录")
 find_package(MLIR REQUIRED CONFIG)
 
 message(STATUS "Using MLIRConfig.cmake in: ${MLIR_DIR}")
@@ -30,7 +31,7 @@ include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${PROJECT_BINARY_DIR})
 
 include_directories(./)
-include_directories(/data2/xiaobin.xia/mlir/llvm-project)
+include_directories(${MLIR_TOP}/llvm-project)
 
 #message(STATUS "Fetching or-tools...")
 #include(FetchContent)

@@ -1,5 +1,6 @@
 
-cmake .. -G Ninja
+cmake -G Ninja -DMLIR_TOP=/home/dministrator/xiaobin.xia/mlir ..
+#cmake -G Ninja -DMLIR_TOP=/data2/xiaobin.xia/mlir ..
 ninja
 
 
